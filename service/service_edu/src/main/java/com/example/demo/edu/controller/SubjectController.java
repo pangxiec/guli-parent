@@ -2,15 +2,14 @@ package com.example.demo.edu.controller;
 
 
 import com.example.common.R;
+import com.example.demo.edu.entity.subject.OneSubject;
 import com.example.demo.edu.service.SubjectService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
@@ -38,8 +37,14 @@ public class SubjectController {
     @PostMapping("/addSubject")
     public R addSubject(MultipartFile file){
         //上传过来的excel文件
-        subjectService.saveSublect(file);
+        subjectService.saveSublect(file,subjectService);
         return R.ok();
+    }
+
+    @GetMapping("/getAllSubject")
+    public R getAllSubject(){
+        List<OneSubject> list = subjectService.getAllOneTwoSubject();
+        return R.ok().data("list",list);
     }
 }
 

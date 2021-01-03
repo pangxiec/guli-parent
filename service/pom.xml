@@ -41,11 +41,11 @@
          </dependency>-->
 
         <!--引入自定义的包-->
-        <dependency>
+<!--        <dependency>
             <groupId>com.example</groupId>
             <artifactId>common_utils</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>com.example</groupId>

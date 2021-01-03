@@ -2,6 +2,7 @@ package com.example.servicebase.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import org.apache.ibatis.reflection.MetaObject;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
@@ -11,6 +12,7 @@ import java.util.Date;
  * @author xmy
  * @date 2020/12/29 11:09
  */
+@Component
 public class MyMetaObjectHandler implements MetaObjectHandler {
 
     @Override

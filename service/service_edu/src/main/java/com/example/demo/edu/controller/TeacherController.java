@@ -46,7 +46,7 @@ public class TeacherController {
      */
     @ApiOperation("删除教师")
     @DeleteMapping("/delete/{id}")
-    public R remove(@PathVariable("id") String id){
+    public R remove(@PathVariable("id") Long id){
         boolean flag = teacherService.removeById(id);
         if (flag){
             return R.ok();
@@ -98,10 +98,10 @@ public class TeacherController {
             wrapper.eq("level",level);
         }
         if (!StringUtils.isEmpty(begin)){
-            wrapper.ge("begin",begin);
+            wrapper.ge("gmt_create",begin);
         }
         if (!StringUtils.isEmpty(end)){
-            wrapper.le("end",end);
+            wrapper.le("gmt_create",end);
         }
 
         //实现条件分页查询
@@ -127,7 +127,9 @@ public class TeacherController {
     @ApiOperation("根据id查询")
     @GetMapping("/getById/{id}")
     public R getById(@PathVariable("id") String id){
+        System.out.println(id);
         Teacher teacher = teacherService.getById(id);
+        System.out.println(teacher);
         return R.ok().data("teacher",teacher);
     }
 
