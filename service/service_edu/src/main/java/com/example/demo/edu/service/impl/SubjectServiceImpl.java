@@ -84,7 +84,7 @@ public class SubjectServiceImpl extends ServiceImpl<SubjectMapper, Subject> impl
                 }
             }
             //把所有二级分类放到一级分类下面去
-            oneSubject.setChild(twoFinalSubjectList);
+            oneSubject.setChildren(twoFinalSubjectList);
         }
         return finalSubjectList;
     }
