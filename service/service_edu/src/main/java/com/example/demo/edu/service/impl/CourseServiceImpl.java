@@ -9,6 +9,7 @@ import com.example.demo.edu.service.CourseService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.servicebase.exceptionhandler.GuliException;
 import org.springframework.beans.BeanUtils;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -48,4 +49,36 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
 
         return cid;
     }
+
+    @Override
+    public CourseInfoVo getCourseInfo(String courseId) {
+        //查询课程表信息
+        Course course = baseMapper.selectById(courseId);
+        CourseInfoVo courseInfoVo = new CourseInfoVo();
+        BeanUtils.copyProperties(course,courseInfoVo);
+
+        //查询描述表
+        CourseDescription courseDescription = descriptionMapper.selectById(courseId);
+        courseInfoVo.setDescription(courseDescription.getDescription());
+
+        return courseInfoVo;
+    }
+
+    @Override
+    public void updateCourseInfo(CourseInfoVo courseInfoVo) {
+        //修改课程表中的信息
+        Course course = new Course();
+        BeanUtils.copyProperties(courseInfoVo,course);
+        int update = baseMapper.updateById(course);
+        if (update == 0){
+            throw new GuliException(20001,"修改课程信息失败");
+        }
+
+        //修改描述表中的信息
+        CourseDescription courseDescription = new CourseDescription();
+        courseDescription.setId(courseInfoVo.getId());
+        courseDescription.setDescription(courseInfoVo.getDescription());
+        descriptionMapper.updateById(courseDescription);
+    }
+
 }

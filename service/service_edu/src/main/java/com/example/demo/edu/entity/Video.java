@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+import java.util.Date;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -29,7 +31,7 @@ public class Video implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "视频ID")
-    @TableId(value = "id", type = IdType.ID_WORKER)
+    @TableId(value = "id", type = IdType.ID_WORKER_STR)
     private String id;
 
     @ApiModelProperty(value = "课程ID")
@@ -69,10 +71,10 @@ public class Video implements Serializable {
     private Long version;
 
     @ApiModelProperty(value = "创建时间")
-    private LocalDateTime gmtCreate;
+    private Date gmtCreate;
 
     @ApiModelProperty(value = "更新时间")
-    private LocalDateTime gmtModified;
+    private Date gmtModified;
 
 
 }

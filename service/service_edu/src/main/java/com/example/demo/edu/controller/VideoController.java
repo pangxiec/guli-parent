@@ -1,9 +1,12 @@
 package com.example.demo.edu.controller;
 
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.example.common.R;
+import com.example.demo.edu.entity.Video;
+import com.example.demo.edu.service.VideoService;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
+import javax.annotation.Resource;
 
 /**
  * <p>
@@ -14,8 +17,18 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2021-01-07
  */
 @RestController
-@RequestMapping("/edu/video")
+@RequestMapping("eduservice/video")
+@CrossOrigin
 public class VideoController {
+
+    @Resource
+    private VideoService videoService;
+
+    @PostMapping("/addVideo")
+    public R addVideo(@RequestBody Video video){
+        videoService.save(video);
+        return R.ok();
+    }
 
 }
 

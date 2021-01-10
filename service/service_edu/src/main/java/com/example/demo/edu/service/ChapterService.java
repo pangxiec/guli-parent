@@ -2,6 +2,9 @@ package com.example.demo.edu.service;
 
 import com.example.demo.edu.entity.Chapter;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.demo.edu.entity.course.ChapterVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,12 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ChapterService extends IService<Chapter> {
 
+    /**
+     * 课程大纲列表 根据课程Id查询
+     * @param courseId
+     * @return
+     */
+    List<ChapterVo> getChapterVideoByCourseId(String courseId);
+
+    Boolean deleteChapter(String chapterId);
 }
