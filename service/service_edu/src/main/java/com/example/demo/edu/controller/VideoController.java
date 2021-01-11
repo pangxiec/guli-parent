@@ -30,5 +30,18 @@ public class VideoController {
         return R.ok();
     }
 
+    /**
+     * TODO 删除小节的时候要把里面的视频也删除
+     * @param id
+     * @return
+     */
+    @PostMapping("/deleteVideo/{id}")
+    public R deleteVideo(@PathVariable String id){
+        videoService.removeById(id);
+        return R.ok();
+    }
+
+
+
 }
 

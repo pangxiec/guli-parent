@@ -3,6 +3,7 @@ package com.example.demo.edu.service.impl;
 import com.example.demo.edu.entity.Course;
 import com.example.demo.edu.entity.CourseDescription;
 import com.example.demo.edu.entity.vo.CourseInfoVo;
+import com.example.demo.edu.entity.vo.CoursePublishVo;
 import com.example.demo.edu.mapper.CourseDescriptionMapper;
 import com.example.demo.edu.mapper.CourseMapper;
 import com.example.demo.edu.service.CourseService;
@@ -79,6 +80,12 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
         courseDescription.setId(courseInfoVo.getId());
         courseDescription.setDescription(courseInfoVo.getDescription());
         descriptionMapper.updateById(courseDescription);
+    }
+
+    @Override
+    public CoursePublishVo publishCourseInfo(String id) {
+        CoursePublishVo publishCourseInfo = baseMapper.getPublishCourseInfo(id);
+        return publishCourseInfo;
     }
 
 }
