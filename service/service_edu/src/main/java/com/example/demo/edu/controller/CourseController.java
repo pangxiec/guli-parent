@@ -2,6 +2,7 @@ package com.example.demo.edu.controller;
 
 
 import com.example.common.R;
+import com.example.demo.edu.entity.Course;
 import com.example.demo.edu.entity.vo.CourseInfoVo;
 import com.example.demo.edu.entity.vo.CoursePublishVo;
 import com.example.demo.edu.service.CourseService;
@@ -48,6 +49,16 @@ public class CourseController {
     public R getPublishCourseInfo(@PathVariable String id) {
         CoursePublishVo coursePublishVo = courseService.publishCourseInfo(id);
         return R.ok().data("publishCourse",coursePublishVo);
+    }
+
+    //最终发布
+    @PostMapping("/publishCourse/{id}")
+    public R publishCourse(@PathVariable String id){
+        Course course = new Course();
+        course.setId(id);
+        course.setStatus("Normal");
+        courseService.updateById(course);
+        return R.ok();
     }
 
 }
