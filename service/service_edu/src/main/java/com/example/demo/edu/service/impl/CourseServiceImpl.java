@@ -6,8 +6,10 @@ import com.example.demo.edu.entity.vo.CourseInfoVo;
 import com.example.demo.edu.entity.vo.CoursePublishVo;
 import com.example.demo.edu.mapper.CourseDescriptionMapper;
 import com.example.demo.edu.mapper.CourseMapper;
+import com.example.demo.edu.service.ChapterService;
 import com.example.demo.edu.service.CourseService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.demo.edu.service.VideoService;
 import com.example.servicebase.exceptionhandler.GuliException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.annotation.Bean;
@@ -27,7 +29,13 @@ import javax.annotation.Resource;
 public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> implements CourseService {
 
     @Resource
-    CourseDescriptionMapper descriptionMapper;
+    private CourseDescriptionMapper descriptionMapper;
+
+    @Resource
+    private VideoService videoService;
+
+    @Resource
+    private ChapterService chapterService;
 
     @Override
     public String addCourseInfo(CourseInfoVo courseInfoVo) {
@@ -86,6 +94,24 @@ public class CourseServiceImpl extends ServiceImpl<CourseMapper, Course> impleme
     public CoursePublishVo publishCourseInfo(String id) {
         CoursePublishVo publishCourseInfo = baseMapper.getPublishCourseInfo(id);
         return publishCourseInfo;
+    }
+
+    @Override
+    public void removeCourse(String courseId) {
+        //根据课程id删除小节
+        videoService.removeVideoByCourseId(courseId);
+
+        //根据课程id删除章节
+        chapterService.removeChapterByCourseId(courseId);
+
+        //根据课程id删除描述
+        descriptionMapper.deleteById(courseId);
+
+        //根据课程id删除课程
+        int result = baseMapper.deleteById(courseId);
+        if (result == 0){
+            throw new GuliException(20001,"删除课程失败");
+        }
     }
 
 }
