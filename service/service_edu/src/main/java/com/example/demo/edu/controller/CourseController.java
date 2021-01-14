@@ -9,6 +9,7 @@ import com.example.demo.edu.service.CourseService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
@@ -25,6 +26,13 @@ public class CourseController {
 
     @Resource
     CourseService courseService;
+
+    //TODO 课程列表显示
+    @GetMapping("/getListCourse")
+    public R getListCourse(){
+        List<Course> list = courseService.list(null);
+        return R.ok().data("list",list);
+    }
 
     @PostMapping("/addCourseInfo")
     public R addCourse(@RequestBody CourseInfoVo courseInfoVo){
