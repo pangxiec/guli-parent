@@ -1,8 +1,8 @@
 package com.example.ucenter.service;
 
+import com.example.ucenter.RegisterVo;
 import com.example.ucenter.entity.UcenterMember;
 import com.baomidou.mybatisplus.extension.service.IService;
-
 /**
  * <p>
  * 会员表 服务类
@@ -14,4 +14,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface UcenterMemberService extends IService<UcenterMember> {
 
     String login(UcenterMember ucenterMember);
+
+    void register(RegisterVo registerVo);
+
+    Integer countRegisterDay(String day);
 }
